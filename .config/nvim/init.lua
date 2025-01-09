@@ -3,7 +3,8 @@ local Plug = vim.fn['plug#']
 
 vim.call("plug#begin")
 
-Plug("savq/melange-nvim")
+Plug("catppuccin/nvim", { ["as"]  = 'catppuccin' })
+
 Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-tree/nvim-web-devicons")
 Plug("romgrk/barbar.nvim")
@@ -15,7 +16,7 @@ Plug('hrsh7th/cmp-nvim-lsp')
 Plug('L3MON4D3/LuaSnip')
 Plug("saadparwaiz1/cmp_luasnip")
 Plug("nvim-lua/plenary.nvim")
-Plug("nvim-telescope/telescipe.nvim", {["tag"] = "0.1.4"})
+Plug("nvim-telescope/telescope.nvim", {["tag"] = "0.1.4"})
 Plug("ibhagwan/fzf-lua", {["branch"] = "main"})
 
 vim.call("plug#end")
@@ -50,4 +51,3 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		vim.api.nvim_set_hl(0, "BufferCurrent", {fg = "black"})
 	end,
 })
-

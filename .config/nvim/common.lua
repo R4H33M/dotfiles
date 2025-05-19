@@ -17,6 +17,9 @@ vim.opt.swapfile = false
 -- maximum number of suggestions
 vim.opt.pumheight = 5
 
+-- minimum number of screenlines visible
+vim.opt.scrolloff = 10
+
 -- use the clipboard when yanking and pasting
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
@@ -42,11 +45,11 @@ vim.opt.showmode = false
 vim.opt.scrolloff = 7
 
 -- tabs should be 4 spaces both when displayed and when editing
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 
 -- set indentation width to 4 for commands like >> and <<
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth = 2
 
 -- maintain current line indentation when starting new line
 vim.opt.autoindent = true

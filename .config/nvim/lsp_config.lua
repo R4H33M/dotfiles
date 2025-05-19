@@ -3,15 +3,14 @@ local map = vim.api.nvim_set_keymap
 
 -- Mappings
 
-local opts = { noremap = true, silent = true }
--- Go to definition
-map("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-
 -- Type Definition, disabled because it doesn't look very good right now
 -- map("n", "<space>D", "<cmd> lua vim.lsp.buf.type_definition()<CR>", opts)
 
 -- Rename Symbol
-map("n", "<space>rn", "<cmd> lua vim.lsp.buf.rename()<CR>", opts)
+map("n", "<space>r", "<cmd> lua vim.lsp.buf.rename()<CR>", {desc = "[R]ename"})
+map("n", "<leader>gd", '<cmd>lua vim.lsp.buf.definition()<CR>', {desc = "[G]o to [D]efinition"})
+map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format()<CR>", {desc = "[C]ode [F]ormat"})
+
 
 --[[ Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -22,11 +21,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 ]] --
-
+--
 local servers = {
 	"lua_ls",
 	"pyright",
-	"rust_analyzer"
+	"rust_analyzer",
+	"clangd",
+	"ts_ls",
+	"svlangserver"
 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -36,3 +38,21 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+--[[
+nvim_lsp["svlangserver"].setup({
+	on_init = function(client)
+
+      client.config.settings.systemverilog = {
+        includeIndexing     = {"**/*.{v,svh}"},
+        excludeIndexing     = {"test/**/*.sv*"},
+        defines             = {},
+        launchConfiguration = "iverilog -I ~/mount/lab2/riscvbyp -I ~/mount/lab2/imuldiv -I ~/mount/lab2/vc -t null",
+		linter = "icarus"
+      }
+
+    client.notify("workspace/didChangeConfiguration")
+    return true
+ end
+})
+--]]

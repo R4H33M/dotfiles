@@ -21,7 +21,7 @@ map("n", "<C-w>", "<Cmd>BufferClose<CR>", { desc = "close tab" })
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- Open Diagnostics 
+vim.keymap.set('n', '<leader>q', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true, desc = "[Q]uickfix current line" })
 
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+--vim.keymap.set('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {})

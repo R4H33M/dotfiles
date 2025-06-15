@@ -45,14 +45,17 @@ vim.opt.showmode = false
 vim.opt.scrolloff = 7
 
 -- tabs should be 4 spaces both when displayed and when editing
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
+vim.opt.tabstop = 8
+vim.opt.softtabstop = 0
 
 -- set indentation width to 4 for commands like >> and <<
-vim.opt.shiftwidth = 2
+vim.opt.shiftwidth = 4
+vim.opt.fixeol = false 
 
 -- maintain current line indentation when starting new line
 vim.opt.autoindent = true
+vim.opt.expandtab = true
+vim.opt.smarttab = true
 
 -- use unix line endings
 vim.opt.fileformat = "unix"

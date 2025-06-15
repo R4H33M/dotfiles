@@ -32,8 +32,8 @@ require "vimtree"
 require "mappings"
 require "barbar_config"
 require "lualine_config"
-require "treesitter_config"
 require "lsp_config"
+require "treesitter_config"
 require "cmp_config"
 require "telescope_config"
 
@@ -45,6 +45,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 		vim.highlight.on_yank()
 	end,
 })
+
+--[[
+vim.api.nvim_create_autocmd('BufWritePost', {
+	desc = 'use the black formatter on python files after saving',
+	group = vim.api.nvim_create_augroup('black-formatter', { clear = true }),
+	pattern = '*.py',
+	callback = function()
+		vim.cmd("!black <afile>")
+	end,
+})
+]]
 
 -- fix the color scheme for selected file barbar
 vim.api.nvim_create_autocmd("ColorScheme", {

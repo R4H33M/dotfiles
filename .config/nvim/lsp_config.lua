@@ -23,12 +23,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 ]] --
 --
 local servers = {
-	"lua_ls",
+--	"lua_ls",
 	"pyright",
-	"rust_analyzer",
-	"clangd",
-	"ts_ls",
-	"svlangserver"
+--	"rust_analyzer",
+   "clangd",
+--	"ts_ls",
+--	"svlangserver"
 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()

@@ -9,6 +9,7 @@ local map = vim.api.nvim_set_keymap
 -- Rename Symbol
 map("n", "<space>r", "<cmd> lua vim.lsp.buf.rename()<CR>", {desc = "[R]ename"})
 map("n", "<leader>gd", '<cmd>lua vim.lsp.buf.definition()<CR>', {desc = "[G]o to [D]efinition"})
+map("n", "<leader>gl", "<cmd>lua vim.lsp.buf.declaration()<CR>", {desc = "[G] to dec[L}aration"})
 map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format()<CR>", {desc = "[C]ode [F]ormat"})
 
 

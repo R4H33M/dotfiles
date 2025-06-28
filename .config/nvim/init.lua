@@ -20,6 +20,7 @@ Plug("nvim-telescope/telescope.nvim", { ["tag"] = "0.1.4" })
 Plug("ibhagwan/fzf-lua", { ["branch"] = "main" })
 Plug("folke/which-key.nvim")
 Plug("numToStr/Comment.nvim")
+Plug("lewis6991/gitsigns.nvim")
 
 vim.call("plug#end")
 

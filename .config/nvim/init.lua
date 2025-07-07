@@ -7,7 +7,7 @@ Plug("catppuccin/nvim", { ["as"] = 'catppuccin' })
 
 Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-tree/nvim-web-devicons")
-Plug("romgrk/barbar.nvim")
+-- Plug("romgrk/barbar.nvim")
 Plug('nvim-lualine/lualine.nvim')
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 Plug("neovim/nvim-lspconfig")
@@ -16,7 +16,7 @@ Plug('hrsh7th/cmp-nvim-lsp')
 Plug('L3MON4D3/LuaSnip')
 Plug("saadparwaiz1/cmp_luasnip")
 Plug("nvim-lua/plenary.nvim")
-Plug("nvim-telescope/telescope.nvim", { ["tag"] = "0.1.4" })
+Plug("nvim-telescope/telescope.nvim")
 Plug("ibhagwan/fzf-lua", { ["branch"] = "main" })
 Plug("folke/which-key.nvim")
 Plug("numToStr/Comment.nvim")
@@ -31,7 +31,7 @@ require "common"
 require "theme"
 require "vimtree"
 require "mappings"
-require "barbar_config"
+-- require "barbar_config"
 require "lualine_config"
 require "lsp_config"
 require "treesitter_config"

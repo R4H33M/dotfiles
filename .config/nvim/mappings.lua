@@ -5,6 +5,7 @@ map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
 map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
 map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
+map("n", "<C-w>", "<C-w>c", { desc = "close window" })
 
 -- nvim tree
 
@@ -12,8 +13,8 @@ map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle nvimtree window" }
 
 -- barbar
 
-map("n", "<Tab>", "<Cmd>BufferNext<CR>", { desc = "switch tab" })
-map("n", "<C-w>", "<Cmd>BufferClose<CR>", { desc = "close tab" })
+-- map("n", "<Tab>", "<Cmd>BufferNext<CR>", { desc = "switch tab" })
+-- map("n", "<C-w>", "<Cmd>BufferClose<CR>", { desc = "close tab" })
 
 -- other
 

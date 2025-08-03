@@ -28,6 +28,7 @@ from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.widget import backlight
 import os
 import subprocess
 from libqtile import hook
@@ -51,7 +52,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    # Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key(
@@ -86,6 +87,7 @@ keys = [
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "c", lazy.spawn("chromium"), desc="Launch chromium"),
+    Key([], "Print", lazy.spawn("flameshot gui"), desc="Launch screenshot"),
     Key([mod], "o", lazy.spawn("obsidian --no-sandbox"), desc="Launch obsidian"),
     Key(
         [mod],
@@ -94,8 +96,8 @@ keys = [
         desc="Launch Postman",
     ),
     # Toggle between different layouts as defined below
-    # Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "Tab", lazy.next_screen(), desc="Toggle screens"),
+    # Key([mod], "Tab", lazy.layout.next(), desc="Toggle between layouts"),
+    # Key([mod], "Tab", lazy.next_screen(), desc="Toggle screens"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
@@ -103,15 +105,28 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
-    Key(
-        [mod],
-        "t",
-        lazy.window.toggle_floating(),
-        desc="Toggle floating on the focused window",
-    ),
+    # Key(
+    #     [mod],
+    #     "t",
+    #     lazy.window.toggle_floating(),
+    #     desc="Toggle floating on the focused window",
+    # ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    # Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key(
+        [],
+        "XF86MonBrightnessUp",
+        lazy.widget['backlight'].change_backlight(backlight.ChangeDirection.UP)
+    ),
+    Key(
+        [],
+        "XF86MonBrightnessDown",
+        lazy.widget['backlight'].change_backlight(backlight.ChangeDirection.DOWN)
+    ),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 5%-"), desc="Lower Volume by 5%"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+"), desc="Raise Volume by 5%"),
+    Key([], "XF86AudioMute", lazy.spawn("amixer sset Master 1+ toggle"), desc="Mute/Unmute Volume")
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -153,11 +168,21 @@ def go_to_group(name: str):
 for i in "1234":
     keys.append(Key([mod], i, lazy.function(go_to_group(i))))
 
+for i in "12345678":
+    keys.extend([
+        Key(
+            [mod, "shift"],
+            i,
+            lazy.window.togroup(i, switch_group=True),
+            desc=f"Switch to & move focused window to group {i}",
+        )
+    ])
+
 layouts = [
     layout.Columns(
-        border_focus="#ff000d", border_width=8, border_on_single=True, insert_position=1
+        border_focus="#ff000d", border_width=8, border_on_single=True, insert_position=1, border_focus_stack="#000dff"
     ),
-    layout.Max(),
+    # layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -192,7 +217,7 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.Backlight(fmt="B: {}", backlight_name="intel_backlight"),
+                widget.Backlight(fmt="B: {}", backlight_name="intel_backlight", change_command = None, step=5),
                 widget.Volume(fmt="V: {}"),
                 widget.Battery(),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
